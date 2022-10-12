@@ -1,16 +1,8 @@
-import Pool from "pg-pool"
-//import { password } from "pg/lib/defaults"
 
-const pool  = new Pool({
+import pool from "../db/connection.js"
 
-user:'wesley',
-host:'localhost',
-database:'postgres',
-password:'root',
-port:5432,
-})
 
-const  getUsers =()=>{
+ const  getUsers =()=>{
 
   return new Promise(function(resolve, reject){
 
@@ -25,8 +17,7 @@ pool.query('SELECT * FROM "user"', (error, results)=>{
 
   })  
 }
-
-const  getUserName =()=>{
+ const  getUserName =()=>{
 
     return new Promise(function(resolve, reject){
   
@@ -42,7 +33,7 @@ const  getUserName =()=>{
     })  
   }
 
-  const  getSpecificUser=(name)=>{
+const  getSpecificUser=(name)=>{
 
     return new Promise(function(resolve, reject){
   
@@ -77,7 +68,7 @@ return new Promise(function (resolve, reject){
       }) 
     }
 
-const deleteUser = (name)=>{
+ const deleteUser = (name)=>{
 
     return new Promise(function (resolve, reject){
 
@@ -98,7 +89,7 @@ pool.query(`DELETE  FROM "user" WHERE name ='${name}'`, (error, results)=>{
 
 })
 }
-const clearTable = (key)=>{
+ const clearTable = ()=>{
 
   return new Promise(function (resolve, reject){
 
@@ -108,7 +99,7 @@ pool.query('DELETE  FROM "user" ', (error, results)=>{
         reject(error)
     }
 
-    resolve(`Table Cleared`)
+    resolve(`Table Cleared ${results}`)
 
 
 

@@ -1,12 +1,13 @@
-import express, { response } from "express";
-import {getUsers, getUserName , getSpecificUser, createUser, deleteUser, clearTable} from "./user_model.js";
-
+import express from "express";
+import routes from "./routes/users.js"
+import morgan from "morgan";
+  
 const app = express()
 
-const port  =3001
+const PORT  = 3001
 app.use(express.json())
 
-
+app.use(morgan(':date :method ":url"'))
 app.use(function(req, res,next){
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
@@ -15,89 +16,10 @@ app.use(function(req, res,next){
 
 })
 
+app.use("/",routes)
 
-app.get("/",(req, res)=>{
+app.listen(PORT, ()=>{
 
-    getUsers()
-    .then(response =>{
-        res.status(200).send(response)
-  
-    })
-    .catch(error => {
-        res.status(500).send(error);
-      })
+    console.log(`App running on ${PORT} `)
 })
 
-
-app.get("/userName",(req, res)=>{
-
-     getUserName()
-     .then(response =>{
-         res.status(200).send(response)
-   
-     })
-     .catch(error => {
-        res.status(500).send(error);
-      })
- })
- 
- app.get("/user/:name",(req, res)=>{
-let name = req.params.name
-    getSpecificUser(name)
-    .then(response =>{
-        res.status(200).send(response)
-  
-    })
-    .catch(error => {
-        res.status(500).send(error);
-      })
-})
-
-app.post("/newUser", (req,res)=>{
-
-let newUser = req.body
-createUser(newUser)
-.then(response =>{
-    res.status(200).send(response)
-
-})
-.catch(error => {
-    res.status(500).send(error);
-  })
-
-
-})
-
-app.delete("/:user",(req,res)=>{
-    let name = req.params.user.toLowerCase()
-   
-deleteUser(name)
-.then(response =>{
-    res.status(200).send(response)
-
-})
-.catch(error => {
-    res.status(500).send(error);
-  })
-
-
-})
-
-app.delete("/api/clearTable/:password",(req,res)=>{
-    const key = req.params.password
-   clearTable(key)
-
-.then(response =>{
-    res.status(200).send(response)
-
-})
-.catch(error => {
-    res.status(500).send(error);
-  })
-
-
-})
-app.listen(port, ()=>{
-
-    console.log(`App running on ${port} `)
-})
