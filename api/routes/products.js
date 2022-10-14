@@ -1,12 +1,11 @@
-import {getUsers, getUserName , getSpecificUser, createUser, deleteUser, clearTable} from "../models/user_model.js";
 import express from "express"
-
+import {getProducts,getProductName,getSpecificProduct, deleteProduct,createProuct,clearTable } from "../models/product_model.js"
 
 let router = express.Router()
 
-router.get("/users",(req, res)=>{
+router.get("/products",(req, res)=>{
 
-    getUsers()
+    getProducts()
     .then(response =>{
         res.status(200).send(response.rows)
   
@@ -18,9 +17,9 @@ router.get("/users",(req, res)=>{
 })
 
 //Returns whole response  object needed for next js Get serverSide Props functionality
-router.get("/usersGSSP",(req, res)=>{
+router.get("/productsGSSP",(req, res)=>{
 
-  getUsers()
+  getProducts()
   .then(response =>{
       res.status(200).send(response)
 
@@ -31,11 +30,11 @@ router.get("/usersGSSP",(req, res)=>{
   
 })
 
-router.get("/userName",(req, res)=>{
+router.get("/productName",(req, res)=>{
 
- getUserName()
+ getProductName()
      .then(response =>{
-         res.status(200).send(response)
+         res.status(200).send(response.rows)
    
      })
      .catch(error => {
@@ -43,11 +42,11 @@ router.get("/userName",(req, res)=>{
       })
  })
  
- router.get("/user/:name",(req, res)=>{
-let name = req.params.name
-  getSpecificUser(name)
+ router.get("/product/:id",(req, res)=>{
+let id = req.params.id
+  getSpecificProduct(id)
     .then(response =>{
-        res.status(200).send(response)
+        res.status(200).send(response.rows)
   
     })
     .catch(error => {
@@ -55,10 +54,10 @@ let name = req.params.name
       })
 })
 
-router.post("/newUser", (req,res)=>{
+router.post("/newProduct", (req,res)=>{
 
-let newUser = req.body
- createUser(newUser)
+let newProduct = req.body
+ createProuct(newProduct)
 .then(response =>{
     res.status(200).send(response)
 
@@ -70,12 +69,12 @@ let newUser = req.body
 
 })
 
-router.delete("/:user",(req,res)=>{
-    let name = req.params.user.toLowerCase()
+router.delete("/:id",(req,res)=>{
+    let id = req.params.id
    
- deleteUser(name)
+ deleteProduct(id)
 .then(response =>{
-    res.status(200).send(response)
+    res.status(200).send(response.rows)
 
 })
 .catch(error => {
@@ -85,9 +84,9 @@ router.delete("/:user",(req,res)=>{
 
 })
 
-router.delete("/api/clearTable/:password",(req,res)=>{
-    const key = req.params.password
- clearTable(key)
+router.delete("/api/clearTable/",(req,res)=>{
+ 
+ clearTable()
 
 .then(response =>{
     res.status(200).send(response)

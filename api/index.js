@@ -1,7 +1,8 @@
 import express from "express";
-import routes from "./routes/users.js"
+import userRoutes from "./routes/users.js"
+import productRoutes from "./routes/products.js"
 import morgan from "morgan";
-  
+//import createTable from "./scripts/create_product_table.js"; 
 const app = express()
 
 const PORT  = 3001
@@ -16,10 +17,22 @@ app.use(function(req, res,next){
 
 })
 
-app.use("/",routes)
+app.use("/",userRoutes, productRoutes)
+
+
+app.get("/", (req, res)=>{
+
+res.send("Welcome to Postgress Api")
+
+})
+
+
+ 
+
 
 app.listen(PORT, ()=>{
 
     console.log(`App running on ${PORT} `)
 })
+
 

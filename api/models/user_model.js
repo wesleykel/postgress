@@ -21,7 +21,7 @@ pool.query('SELECT * FROM "user"', (error, results)=>{
 
     return new Promise(function(resolve, reject){
   
-  pool.query('SELECT name FROM "user"', (error, results)=>{
+  pool.query('SELECT firstname , surname FROM "user"', (error, results)=>{
   
       if(error){
           reject(error)
@@ -37,7 +37,7 @@ const  getSpecificUser=(name)=>{
 
     return new Promise(function(resolve, reject){
   
-  pool.query(`SELECT * FROM "user" WHERE name = '${name}'`, (error, results)=>{
+  pool.query(`SELECT * FROM "user" WHERE surname = '${name}'`, (error, results)=>{
   
       if(error){
           reject(error)
@@ -53,9 +53,9 @@ const  getSpecificUser=(name)=>{
 
 return new Promise(function (resolve, reject){
 
-    const { name , email, password , age} = body
+    const { firstname , surname , email, password , age , birth_date} = body
 
-    pool.query('INSERT INTO  "user" (name, email, password, age) VALUES ($1,$2,$3,$4) RETURNING *',[name, email, password, age],(error, results)=>{
+    pool.query('INSERT INTO  "user" (firstname, surname, email, password, age, birth_date) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',[firstname,surname, email, password, age, birth_date],(error, results)=>{
 
 
         if(error){
@@ -68,11 +68,11 @@ return new Promise(function (resolve, reject){
       }) 
     }
 
- const deleteUser = (name)=>{
+ const deleteUser = (name,date)=>{
 
     return new Promise(function (resolve, reject){
 
-pool.query(`DELETE  FROM "user" WHERE name ='${name}'`, (error, results)=>{
+pool.query(`DELETE  FROM "user" WHERE surname ='${name}',birth_date='${date}'`, (error, results)=>{
 
     if(error){
         reject(error)
@@ -112,7 +112,6 @@ pool.query('DELETE  FROM "user" ', (error, results)=>{
 
 
 }
-
 
 
 

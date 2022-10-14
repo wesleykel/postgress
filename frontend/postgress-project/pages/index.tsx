@@ -16,7 +16,7 @@ const Home: NextPage = (data) => {
 
 export async function getServerSideProps(){
 
-  const res = await fetch("http://localhost:3001/")
+  const res = await fetch("http://localhost:3001/usersGSSP")
   const data = await res.json()
   
   return{
