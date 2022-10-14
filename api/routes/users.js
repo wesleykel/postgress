@@ -1,4 +1,4 @@
-import {getUsers, getUserName , getSpecificUser, createUser, deleteUser, clearTable} from "../models/user_model.js";
+import {getUsers, getUserName , getSpecificUser, createUser, deleteUser} from "../models/user_model.js";
 import express from "express"
 
 
@@ -85,18 +85,5 @@ router.delete("/:user",(req,res)=>{
 
 })
 
-router.delete("/api/clearTable/:password",(req,res)=>{
-    const key = req.params.password
- clearTable(key)
 
-.then(response =>{
-    res.status(200).send(response)
-
-})
-.catch(error => {
-    res.status(500).send(error);
-  })
-
-
-})
 export default router

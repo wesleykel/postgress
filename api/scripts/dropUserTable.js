@@ -4,7 +4,7 @@ import pool from "../db/connection.js"
   
     const dropUserTable = async ()=>{
 
-        const query =`DROP TABLE users2;`
+        const query =`DROP TABLE user;`
 
 await pool.connect();
 
@@ -17,5 +17,5 @@ console.log("done")
     };
 
 
-       dropUserTable().then(()=> console.table("product table drooped"))
+       dropUserTable().then(()=> console.table("product user drooped"))
     .catch(error =>console.error(error.stack))

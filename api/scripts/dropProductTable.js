@@ -4,7 +4,7 @@ import pool from "../db/connection.js"
   
     const dropProdTable = async ()=>{
 
-        const query =`DROP TABLE products78;`
+        const query =`DROP TABLE products;`
 
 await pool.connect();
 

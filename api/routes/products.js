@@ -1,5 +1,5 @@
 import express from "express"
-import {getProducts,getProductName,getSpecificProduct, deleteProduct,createProuct,clearTable } from "../models/product_model.js"
+import {getProducts,getProductName,getSpecificProduct, deleteProduct,createProduct} from "../models/product_model.js"
 
 let router = express.Router()
 
@@ -57,7 +57,7 @@ let id = req.params.id
 router.post("/newProduct", (req,res)=>{
 
 let newProduct = req.body
- createProuct(newProduct)
+ createProduct(newProduct)
 .then(response =>{
     res.status(200).send(response)
 
@@ -69,26 +69,11 @@ let newProduct = req.body
 
 })
 
-router.delete("/:id",(req,res)=>{
+router.delete("/product/:id",(req,res)=>{
     let id = req.params.id
    
  deleteProduct(id)
 .then(response =>{
-    res.status(200).send(response.rows)
-
-})
-.catch(error => {
-    res.status(500).send(error);
-  })
-
-
-})
-
-router.delete("/api/clearTable/",(req,res)=>{
- 
- clearTable()
-
-.then(response =>{
     res.status(200).send(response)
 
 })
@@ -98,4 +83,6 @@ router.delete("/api/clearTable/",(req,res)=>{
 
 
 })
+
+
 export default router

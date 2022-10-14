@@ -5,7 +5,7 @@ import pool from "../db/connection.js"
 
   return new Promise(function(resolve, reject){
 
-pool.query('SELECT * FROM product', (error, results)=>{
+pool.query('SELECT * FROM products', (error, results)=>{
 
     if(error){
         reject(error)
@@ -20,7 +20,7 @@ pool.query('SELECT * FROM product', (error, results)=>{
 
     return new Promise(function(resolve, reject){
   
-  pool.query('SELECT product_name FROM product', (error, results)=>{
+  pool.query('SELECT product_name FROM products', (error, results)=>{
   
       if(error){
           reject(error)
@@ -36,7 +36,7 @@ const  getSpecificProduct=(id)=>{
 
     return new Promise(function(resolve, reject){
   
-  pool.query(`SELECT * FROM product WHERE product_id = '${id}'`, (error, results)=>{
+  pool.query(`SELECT * FROM products WHERE id = '${id}'`, (error, results)=>{
   
       if(error){
           reject(error)
@@ -48,21 +48,21 @@ const  getSpecificProduct=(id)=>{
     })  
   }
   
-  const createProuct = (body)=>{
+  const createProduct = (body)=>{
 
 return new Promise(function (resolve, reject){
 
-    const { product_name , product_id, description , price, sale_price,on_sale, out_of_stock
+    const { product_name, description ,currency_type, price, sale_price, amount_in_stock,on_sale, out_of_stock
     } = body
 
-    pool.query('INSERT INTO  product (product_name , product_id, description , price ,sale_price,on_sale, out_of_stock) VALUES ($1,$2,$3,$4, $5, $6,$7) RETURNING *',[product_name , product_id, description , price, sale_price,on_sale, out_of_stock],(error, results)=>{
+    pool.query('INSERT INTO products (product_name, description, currency_type ,price,sale_price,amount_in_stock,on_sale, out_of_stock) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *',[product_name,description,currency_type,price,sale_price,amount_in_stock,on_sale,out_of_stock],(error, results)=>{
 
 
         if(error){
             reject(error)
         }
     
-        resolve(`a new product has been added: ${results.rows}`)
+        resolve(`a new product has been added: ${results}`)
     })
     
       }) 
@@ -72,7 +72,7 @@ return new Promise(function (resolve, reject){
 
     return new Promise(function (resolve, reject){
 
-pool.query(`DELETE  FROM product WHERE name ='${id}'`, (error, results)=>{
+pool.query(`DELETE FROM products WHERE id ='${id}'`, (error, results)=>{
 
     if(error){
         reject(error)
@@ -89,29 +89,7 @@ pool.query(`DELETE  FROM product WHERE name ='${id}'`, (error, results)=>{
 
 })
 }
- const clearTable = ()=>{
-
-  return new Promise(function (resolve, reject){
-
-pool.query('DELETE  FROM product ', (error, results)=>{
-
-    if(error){
-        reject(error)
-    }
-
-    resolve(`Table Cleared ${results}`)
-
-
-
-
-})
-
-
-
-})
-
-
-}
+ 
 
 
 
@@ -120,4 +98,4 @@ pool.query('DELETE  FROM product ', (error, results)=>{
 
 
 
-export { getProducts, getProductName, getSpecificProduct, createProuct, deleteProduct, clearTable}
+export { getProducts, getProductName, getSpecificProduct, createProduct, deleteProduct}

@@ -55,14 +55,14 @@ return new Promise(function (resolve, reject){
 
     const { firstname , surname , email, password , age , birth_date} = body
 
-    pool.query('INSERT INTO  "user" (firstname, surname, email, password, age, birth_date) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',[firstname,surname, email, password, age, birth_date],(error, results)=>{
+    pool.query('INSERT INTO  users (firstname, surname, email, password, age, birth_date) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',[firstname,surname, email, password, age, birth_date],(error, results)=>{
 
 
         if(error){
             reject(error)
         }
     
-        resolve(`a new user has been added: ${results.rows}`)
+        resolve(`a new user has been added: ${results}`)
     })
     
       }) 
@@ -89,29 +89,6 @@ pool.query(`DELETE  FROM "user" WHERE surname ='${name}',birth_date='${date}'`, 
 
 })
 }
- const clearTable = ()=>{
-
-  return new Promise(function (resolve, reject){
-
-pool.query('DELETE  FROM "user" ', (error, results)=>{
-
-    if(error){
-        reject(error)
-    }
-
-    resolve(`Table Cleared ${results}`)
-
-
-
-
-})
-
-
-
-})
-
-
-}
 
 
 
@@ -119,4 +96,5 @@ pool.query('DELETE  FROM "user" ', (error, results)=>{
 
 
 
-export { getUsers, getUserName, getSpecificUser, createUser, deleteUser, clearTable}
+
+export { getUsers, getUserName, getSpecificUser, createUser, deleteUser}

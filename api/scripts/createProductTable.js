@@ -5,9 +5,8 @@ import pool from "../db/connection.js"
     const newTable = async ()=>{
 
         const query =`CREATE TABLE IF NOT EXISTS products(
-            id int PRIMARY KEY,
+            id INT GENERATED ALWAYS AS IDENTITY,
             product_name varchar(255), 
-            product_id SERIAL,
             description varchar(255), 
             currency_type varchar(1),
             price DECIMAL(6,2),
