@@ -2,6 +2,9 @@ import express from "express";
 import userRoutes from "./routes/users.js"
 import productRoutes from "./routes/products.js"
 import morgan from "morgan";
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 //import createTable from "./scripts/create_product_table.js"; 
 const app = express()
 
@@ -27,7 +30,7 @@ res.send("Welcome to Postgress Api")
 })
 
 
- 
+
 
 
 app.listen(PORT, ()=>{
