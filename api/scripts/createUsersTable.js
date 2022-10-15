@@ -4,7 +4,7 @@ import pool from "../db/connection.js"
   
     const newTable = async ()=>{
 
-        const query =`CREATE TABLE IF NOT EXISTS users(
+        const query =`CREATE TABLE IF NOT EXISTS users2(
             id INT GENERATED ALWAYS AS IDENTITY,
             firstName varchar(255), 
             surname varchar(255), 
