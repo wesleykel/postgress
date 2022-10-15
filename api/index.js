@@ -20,8 +20,8 @@ app.use(function(req, res,next){
 
 })
 
-app.use("/",userRoutes, productRoutes)
-
+app.use("/",userRoutes)
+app.use("/" ,productRoutes)
 
 app.get("/", (req, res)=>{
 
