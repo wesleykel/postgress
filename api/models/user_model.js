@@ -6,7 +6,7 @@ import pool from "../db/connection.js"
 
   return new Promise(function(resolve, reject){
 
-pool.query('SELECT * FROM "user"', (error, results)=>{
+pool.query('SELECT * FROM "users"', (error, results)=>{
 
     if(error){
         reject(error)
@@ -21,7 +21,7 @@ pool.query('SELECT * FROM "user"', (error, results)=>{
 
     return new Promise(function(resolve, reject){
   
-  pool.query('SELECT firstname , surname FROM "user"', (error, results)=>{
+  pool.query('SELECT firstname , surname FROM "users"', (error, results)=>{
   
       if(error){
           reject(error)
@@ -37,7 +37,7 @@ const  getSpecificUser=(name)=>{
 
     return new Promise(function(resolve, reject){
   
-  pool.query(`SELECT * FROM "user" WHERE surname = '${name}'`, (error, results)=>{
+  pool.query(`SELECT * FROM "users" WHERE surname = '${name}'`, (error, results)=>{
   
       if(error){
           reject(error)
@@ -72,7 +72,7 @@ return new Promise(function (resolve, reject){
 
     return new Promise(function (resolve, reject){
 
-pool.query(`DELETE  FROM "user" WHERE surname ='${name}',birth_date='${date}'`, (error, results)=>{
+pool.query(`DELETE  FROM "users" WHERE surname ='${name}',birth_date='${date}'`, (error, results)=>{
 
     if(error){
         reject(error)
