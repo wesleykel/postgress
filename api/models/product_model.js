@@ -78,7 +78,7 @@ pool.query(`DELETE FROM products WHERE id ='${id}'`, (error, results)=>{
         reject(error)
     }
 
-    resolve(`user ${id} deleted from ${results.rows}`)
+    resolve(`user ${id} deleted from ${results.rowCount}`)
 
 
 

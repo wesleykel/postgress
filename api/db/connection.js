@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 
-//import parse from "pg-connection-string"
-//let config = parse('postgres://wesley:root@localhost:5432/postgres')
 
 import Pool from "pg-pool"
 

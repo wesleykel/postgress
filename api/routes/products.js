@@ -3,7 +3,7 @@ import {getProducts,getProductName,getSpecificProduct, deleteProduct,createProdu
 
 let router = express.Router()
 
-router.get("/products",(req, res)=>{
+router.get("/",(req, res)=>{
 
     getProducts()
     .then(response =>{
@@ -17,7 +17,7 @@ router.get("/products",(req, res)=>{
 })
 
 //Returns whole response  object needed for next js Get serverSide Props functionality
-router.get("/productsGSSP",(req, res)=>{
+router.get("/GSSP",(req, res)=>{
 
   getProducts()
   .then(response =>{
@@ -30,7 +30,7 @@ router.get("/productsGSSP",(req, res)=>{
   
 })
 
-router.get("/productName",(req, res)=>{
+router.get("/name",(req, res)=>{
 
  getProductName()
      .then(response =>{
@@ -42,7 +42,7 @@ router.get("/productName",(req, res)=>{
       })
  })
  
- router.get("/product/:id",(req, res)=>{
+ router.get("/:id",(req, res)=>{
 let id = req.params.id
   getSpecificProduct(id)
     .then(response =>{
@@ -54,7 +54,7 @@ let id = req.params.id
       })
 })
 
-router.post("/newProduct", (req,res)=>{
+router.post("/new", (req,res)=>{
 
 let newProduct = req.body
  createProduct(newProduct)
@@ -69,13 +69,13 @@ let newProduct = req.body
 
 })
 
-router.delete("/product/:id",(req,res)=>{
+router.delete("/:id",(req,res)=>{
     let id = req.params.id
    
  deleteProduct(id)
 .then(response =>{
     res.status(200).send(response)
-
+console.log(response)
 })
 .catch(error => {
     res.status(500).send(error);

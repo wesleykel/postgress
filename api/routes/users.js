@@ -4,7 +4,7 @@ import express from "express"
 
 let router = express.Router()
 
-router.get("/users",(req, res)=>{
+router.get("/",(req, res)=>{
 
     getUsers()
     .then(response =>{
@@ -18,7 +18,7 @@ router.get("/users",(req, res)=>{
 })
 
 //Returns whole response  object needed for next js Get serverSide Props functionality
-router.get("/usersGSSP",(req, res)=>{
+router.get("/GSSP",(req, res)=>{
 
   getUsers()
   .then(response =>{
@@ -31,7 +31,7 @@ router.get("/usersGSSP",(req, res)=>{
   
 })
 
-router.get("/userName",(req, res)=>{
+router.get("/name",(req, res)=>{
 
  getUserName()
      .then(response =>{
@@ -43,7 +43,7 @@ router.get("/userName",(req, res)=>{
       })
  })
  
- router.get("/user/:name",(req, res)=>{
+ router.get("/name/:name",(req, res)=>{
 let name = req.params.name
   getSpecificUser(name)
     .then(response =>{
@@ -55,7 +55,7 @@ let name = req.params.name
       })
 })
 
-router.post("/newUser", (req,res)=>{
+router.post("/new", (req,res)=>{
 
 let newUser = req.body
  createUser(newUser)
@@ -70,10 +70,11 @@ let newUser = req.body
 
 })
 
-router.delete("/:user",(req,res)=>{
-    let name = req.params.user.toLowerCase()
-   
- deleteUser(name)
+router.delete("/:_id",(req,res)=>{
+let ID =parseInt(req.params._id)
+  
+  
+ deleteUser(ID)
 .then(response =>{
     res.status(200).send(response)
 

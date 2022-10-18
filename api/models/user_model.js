@@ -68,17 +68,19 @@ return new Promise(function (resolve, reject){
       }) 
     }
 
- const deleteUser = (name,date)=>{
+ const  deleteUser = (ID)=>{
+
+
 
     return new Promise(function (resolve, reject){
 
-pool.query(`DELETE  FROM "users" WHERE surname ='${name}',birth_date='${date}'`, (error, results)=>{
-
+pool.query(`DELETE  FROM "users" WHERE id=${ID}`, (error, results)=>{
+console.log(results)
     if(error){
         reject(error)
     }
 
-    resolve(`user ${name} deleted from ${results.rows}`)
+    resolve(`user ${ID} deleted from ${results}`)
 
 
 

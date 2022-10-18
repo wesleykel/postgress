@@ -5,11 +5,14 @@ import morgan from "morgan";
 import * as dotenv from 'dotenv'
 
 dotenv.config()
-//import createTable from "./scripts/create_product_table.js"; 
+ 
 const app = express()
-const PORT = process.env.PORT || 3000;
-//const PORT  = 3001
+// eslint-disable-next-line no-undef
+const PORT = process.env.PORT || 3090;
+
 app.use(express.json())
+
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 app.use(morgan(':date :method ":url"'))
 app.use(function(req, res,next){
@@ -20,8 +23,8 @@ app.use(function(req, res,next){
 
 })
 
-app.use("/",userRoutes)
-app.use("/" ,productRoutes)
+app.use("/user",userRoutes)
+app.use("/product" ,productRoutes)
 
 app.get("/", (req, res)=>{
 
