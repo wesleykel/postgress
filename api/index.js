@@ -1,14 +1,18 @@
 import express from "express";
-import userRoutes from "./routes/users.js"
-import productRoutes from "./routes/products.js"
+import userRoutes from "./routes/users.js";
+import productRoutes from "./routes/products.js";
 import morgan from "morgan";
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 
-dotenv.config()
- 
-const app = express()
+dotenv.config();
+const app = express();
+
+
+
+
+
 // eslint-disable-next-line no-undef
-const PORT = process.env.PORT || 3090;
+const PORT = process.env.PORT || 3091;
 
 app.use(express.json())
 
@@ -42,3 +46,6 @@ app.listen(PORT, ()=>{
 })
 
 
+
+
+export default app
