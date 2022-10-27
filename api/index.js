@@ -3,12 +3,12 @@ import userRoutes from "./routes/users.js";
 import productRoutes from "./routes/products.js";
 import morgan from "morgan";
 import * as dotenv from 'dotenv';
-
+import cors from "cors"
 dotenv.config();
 const app = express();
 
 
-
+app.use(cors())
 
 
 // eslint-disable-next-line no-undef
